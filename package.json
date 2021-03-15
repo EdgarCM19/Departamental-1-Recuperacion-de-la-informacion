@@ -37,7 +37,10 @@
     "parserOptions": {
       "ecmaVersion": 2020
     },
-    "rules": {}
+    "rules": {
+      "camelcase": "off",
+      "@typescript-eslint/camelcase": "off"
+    }
   },
   "browserslist": [
     "> 1%",
