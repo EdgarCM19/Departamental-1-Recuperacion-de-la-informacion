@@ -18,6 +18,7 @@
 import { defineComponent, reactive, ref } from 'vue';
 import InputFile from '@/components/InputFile.vue';
 import Button from '@/components/Button.vue';
+import { deleteStopWords, stemmer } from './logic';
 
 export default defineComponent({
   name: 'App',
@@ -45,15 +46,19 @@ export default defineComponent({
       const re = new RegExp('[\.\,\:\;\?\!\'\"\”\“\’]', 'g'); // eslint-disable-line
       text.value = text.value.replaceAll(re, ''); // eslint-disable-line
       activeButtons.lexico = true;
+      // console.log(deleteStopWords('a car is she love'))
     }
 
     function eliminacion(){
-      console.log('Eliminacion');
+      // console.log('Eliminacion');
+      text.value = deleteStopWords(text.value);
       activeButtons.cerradas = true;
     }
 
     function truncamiento(){
-      console.log('truncamiento');
+      // console.log('truncamiento');
+      // console.log(stemmer(text.value));
+      text.value = stemmer(text.value);
       activeButtons.truncamiento = true;
     }
 
