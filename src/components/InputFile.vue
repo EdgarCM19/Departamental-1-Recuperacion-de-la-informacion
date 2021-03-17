@@ -1,7 +1,8 @@
 <template>
-    <div class="input-file-wrapper">
+    <div class="input-file-wrapper" :class="{'clickme': loaded}">
         <div>Documento selecionado: {{file_path}}</div>
-        <input class="input-file" type="file" id="my-file" @change="loadFromFile">
+        <input class="input-file" type="file" id="my-file" @change="loadFromFile"
+        @click="() => loaded = false" >
         <label for="my-file" class="input-file-trigger">{{placeholder}}</label>
     </div>
 </template>
@@ -19,6 +20,7 @@ export default {
     },
     setup(_props: any, { emit }: any) {
         const file_path = ref('');
+        const loaded = ref(true);
         function loadFromFile(event: any){
             const file = event.target.files[0];
             file_path.value = event.target.files[0].name;
@@ -30,6 +32,7 @@ export default {
         return {
             loadFromFile,
             file_path,
+            loaded
         };
     }
 }
@@ -70,5 +73,26 @@ export default {
     opacity: 0;
     padding: 14px 0;
     cursor: pointer;
+}
+
+.clickme {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 </style>
