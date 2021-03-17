@@ -12,13 +12,35 @@
     <Button :on_click_fn="truncamiento" :disabled="activeButtons.truncamiento">Truncamiento</Button>
   </div>
   <!-- <div>{{text}}</div> -->
+  <div class="team">
+    <div class="integrante">
+      <div class="nombre">Castro Martinez Edgar</div>
+      <div class="matricula">201748214</div>
+    </div>
+    <div class="integrante">
+      <div class="nombre">Hernandez Cervantes Mariana</div>
+      <div class="matricula">201740053</div>
+    </div>
+    <div class="integrante">
+      <div class="nombre">Lopez Romero Diana</div>
+      <div class="matricula">201766874</div>
+    </div>
+    <div class="integrante">
+      <div class="nombre">Otlica Rosalino Jesus</div>
+      <div class="matricula">201758692</div>
+    </div>
+    <div class="integrante">
+      <div class="nombre">Salazar Romero Nelly</div>
+      <div class="matricula">201751993</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
 import InputFile from '@/components/InputFile.vue';
 import Button from '@/components/Button.vue';
-import { deleteStopWords, stemmer } from './logic';
+import { deleteStopWords, PorterStemmer} from './logic';
 
 export default defineComponent({
   name: 'App',
@@ -36,29 +58,45 @@ export default defineComponent({
 
     function loadText(event: any){
       text.value = event;
-      console.log('holas');
       activeButtons.lexico = false;
       activeButtons.cerradas = false;
       activeButtons.truncamiento = false;
     }
 
     function analisisLexico(){
+      if(text.value.length <= 0){
+        alert('Seleccione un documento antes de tratar de hacer el analisis lexico');
+        return;
+      }
       const re = new RegExp('[\.\,\:\;\?\!\'\"\”\“\’]', 'g'); // eslint-disable-line
       text.value = text.value.replaceAll(re, ''); // eslint-disable-line
       activeButtons.lexico = true;
-      // console.log(deleteStopWords('a car is she love'))
     }
 
     function eliminacion(){
-      // console.log('Eliminacion');
+      if(text.value.length <= 0){
+        alert('Seleccione un documento antes de tratar de hacer el analisis lexico');
+        return;
+      }
+      if(activeButtons.lexico === false){
+        alert('Ejecute primero el analisis lexico antes de la eliminacion de palabras');
+        return;
+      }
       text.value = deleteStopWords(text.value);
       activeButtons.cerradas = true;
     }
 
     function truncamiento(){
-      // console.log('truncamiento');
-      // console.log(stemmer(text.value));
-      text.value = stemmer(text.value);
+      if(text.value.length <= 0){
+        alert('Seleccione un documento antes de tratar de hacer el analisis lexico');
+        return;
+      }
+      if(activeButtons.lexico === false || activeButtons.cerradas === false){
+        alert('Ejecute primero el analisis lexico y la eliminacion de palabras antes del truncamiento');
+        return;
+      }
+      const porter = new PorterStemmer();
+      text.value = porter.steem(text.value);
       activeButtons.truncamiento = true;
     }
 
@@ -76,6 +114,11 @@ export default defineComponent({
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+}
+
 html {
   
   font-family: 'Poppins', sans-serif;
@@ -101,8 +144,8 @@ textarea{
   padding: 8px 16px;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  width: 100%;
-  height: 60vh;
+  width: 80%;
+  height: 55vh;
   border: none;
   resize: none;
   background: inherit;
@@ -114,7 +157,38 @@ textarea:focus{
   outline: none;
 }
 
+.team {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.team .integrante {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team .integrante > div {
+  width: auto;
+  font-size: 12px;
+  color: rgb(134, 134, 134);
+  margin: 4px;
+}
+
+div.matricula {
+  text-align: left;
+}
+
 #app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
