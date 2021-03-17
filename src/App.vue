@@ -68,7 +68,7 @@ export default defineComponent({
         alert('Seleccione un documento antes de tratar de hacer el analisis lexico');
         return;
       }
-      const re = new RegExp('[\.\,\:\;\?\!\'\"\”\“\’]', 'g'); // eslint-disable-line
+      const re = new RegExp('[\.\,\:\;\?\!\'\"\”\“\’\…]', 'g'); // eslint-disable-line
       text.value = text.value.replaceAll(re, ''); // eslint-disable-line
       activeButtons.lexico = true;
     }
