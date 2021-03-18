@@ -1,24 +1,25 @@
-# departamental-1
+# Departamental 1 - Recuperacion de la informacion
+
+Repocitorio correspondiente al codigo desarrollado y usado para la resolucion del primer departamental de la materia de **Recuperacion de la Infromacion**  
+Realiza:  
+- El analisis lexico (eliminacion de signos de puntuacion y numeros).
+- La eliminacion de palabras vacias (step words).
+- La lematizacion o truncamiento de palabras.
+
+Todo lo anterior tomando en cuenta un documento en el idioma ingles.
+
+## Version en vivo (pagina web)
+[
+
+#### Equipo:
+- Castro Martinez Edgar
+- Hernandez Cervantes Mariana
+- Lopez Romero Diana
+- Otlica Rosalino Jesus
+- Salazar Romero Nelly
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
