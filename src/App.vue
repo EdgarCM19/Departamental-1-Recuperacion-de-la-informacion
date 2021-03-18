@@ -98,12 +98,12 @@ export default defineComponent({
         "]",
         "{",
         "}",
+        "–",
       ];
       text.value = text.value.replaceAll(re, "").toLowerCase(); // eslint-disable-line
       puntuation.forEach((x) => {
         text.value = text.value.replaceAll(x, " ");
       });
-      text.value = text.value.replaceAll("-", " ");
       activeButtons.lexico = true;
     }
 
