@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "tslib": "2.1.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -46,5 +47,7 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "keywords": [],
+  "description": ""
 }
